@@ -48,9 +48,10 @@ def gallery(request):
     User = user = request.user
     topic = request.GET.get('topic')
     if topic == None:
-        photos = Photo.objects.filter(topic__user=user)
-    else:
         photos = Photo.objects.all()
+        
+    else:
+        photos = Photo.objects.filter(topic__user=user)
 
     topics = Topic.objects.filter(user=user)
     context = {'topics': topics, 'photos': photos}
