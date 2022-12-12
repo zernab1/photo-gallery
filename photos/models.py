@@ -25,6 +25,8 @@ class Photo(models.Model):
     
     topic = models.ForeignKey(
         Topic, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    user_name = topic.user.username
     image = models.ImageField(null=False, blank=False)
     created_on = models.DateTimeField(default=timezone.now)
     description = models.TextField()
