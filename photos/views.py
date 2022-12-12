@@ -3,6 +3,7 @@ from .models import Topic, Photo
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
+from django.contrib.auth import get_user_model
 # Create your views here.
 
 def loginUser(request):
@@ -45,15 +46,15 @@ def registerUser(request):
 
 @login_required(login_url='login')
 def gallery(request):
-    user = request.user
+    User = get_user_model()
     topic = request.GET.get('topic')
     if topic == None:
-        photos = Photo.objects.filter(topic__user=user)
+        photos = Photo.objects.filter(topic__user=User.objects.all())
     else:
         photos = Photo.objects.filter(
-            topic__name=topic, topic__user=user)
+            topic__name=topic, topic__user=User.objects.all())
 
-    topics = Topic.objects.filter(user=user)
+    topics = Topic.objects.filter(user=User.objects.all())
     context = {'topics': topics, 'photos': photos}
     return render(request, 'photos/gallery.html', context)
 
