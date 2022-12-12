@@ -68,7 +68,7 @@ def viewPhoto(request, photo_id):
 def addPhoto(request):
     user = request.user
 
-    topics = user.topic_set.all()
+    topics = Topic.objects.all()
 
     if request.method == 'POST':
         data = request.POST
