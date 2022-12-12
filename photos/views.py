@@ -49,11 +49,11 @@ def gallery(request):
     topic = request.GET.get('topic')
     if topic == None:
         photos = Photo.objects.all()
-        
     else:
-        photos = Photo.objects.filter(topic__user=user)
+        photos = Photo.objects.filter(
+            topic__name=topic)
 
-    topics = Topic.objects.filter(user=user)
+    topics = Topic.objects.all()
     context = {'topics': topics, 'photos': photos}
     return render(request, 'photos/gallery.html', context)
 
