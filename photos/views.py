@@ -50,8 +50,7 @@ def gallery(request):
     if topic == None:
         photos = Photo.objects.filter(topic__user=user)
     else:
-        photos = Photo.objects.filter(
-            topic__name=topic, topic__user=user)
+        photos = Photo.objects.all()
 
     topics = Topic.objects.filter(user=user)
     context = {'topics': topics, 'photos': photos}
